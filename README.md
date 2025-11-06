@@ -22,6 +22,7 @@
   - bank: many-to-one
 
 - Card:
+  - id
   - number: number
   - pin: number
   - account: one-to-one (?)
