@@ -39,3 +39,8 @@
 ### Activar tarjeta
 
 ### Cambiar pin
+
+# Comentarios
+
+- He simplificado le funcionalidad de sacar dinero
+- Los test de integración de service fallan porque creo que el pool no está obteniendo las variables de entorno para poder hacer la conexión con la base de datos
