@@ -5,6 +5,13 @@ export interface DepositDto {
   amount: number;
 }
 
+export interface WithdrawDto {
+  cardNumber: string;
+  cardPin: string;
+  iban: string;
+  amount: number;
+}
+
 export interface Account {
   id: string;
   iban: string;

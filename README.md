@@ -5,7 +5,7 @@
 ### Ingresar dinero
 
     - Solo se podrá ingresar dinero a la cuenta asociada a la tarjeta
-    - Solo se podrá ingresar dinero a una cuenta desde un cajero del mismo banco
+    - El pin deberá coincidir con el de la tarjeta
 
 #### Modelo
 
@@ -28,6 +28,9 @@
   - account: one-to-one (?)
 
 ### Sacar dinero
+
+    - Solo se podrá ingresar dinero a la cuenta asociada a la tarjeta
+    - El pin deberá coincidir con el de la tarjeta
 
 ### Transferencias
 
