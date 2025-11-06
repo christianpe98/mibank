@@ -1,9 +1,6 @@
 import { BadRequestError } from "@/helpers/custom-errors.helper";
 import { validate } from "@/helpers/validate.helper";
-import {
-  depositSchema,
-  withdrawSchema,
-} from "@/models/schemas/accounts.schema";
+import { depositSchema, withdrawSchema } from "@/api/schemas/accounts.schema";
 import { depositService, withdrawService } from "@/services/accounts.service";
 import type { NextFunction, Request, Response } from "express";
 

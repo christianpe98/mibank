@@ -3,7 +3,7 @@ import {
   UnauthorizedError,
 } from "@/helpers/custom-errors.helper";
 import { validate } from "@/helpers/validate.helper";
-import { cardAuthenticationSchema } from "@/models/schemas/cards.schema";
+import { cardAuthenticationSchema } from "@/api/schemas/cards.schema";
 import { isPinValidService } from "@/services/cards.service";
 import type { NextFunction, Request, Response } from "express";
 

@@ -1,8 +1,8 @@
 import express from "express";
 import { serve, setup } from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
-import accountsRouter from "@/routes/accounts.route";
-import { errorMiddleware } from "./middleware/error.middleware";
+import accountsRouter from "@/api/routes/accounts.route";
+import { errorMiddleware } from "./api/middleware/error.middleware";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -20,7 +20,7 @@ const swaggerOptions = {
       description: "A sample Express.js API built with TypeScript and Swagger",
     },
   },
-  apis: ["./src/routes/*.ts"],
+  apis: ["./src/api/routes/*.ts"],
 };
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
 app.use("/docs", serve, setup(swaggerDocs));

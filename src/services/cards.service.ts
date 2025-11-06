@@ -1,6 +1,6 @@
+import { comparePin } from "@/core/cards.core";
 import { InternalServerError } from "@/helpers/custom-errors.helper";
 import { getCardByNumberRepository } from "@/repositories/cards.repository";
-import bcrypt from "bcryptjs";
 
 export const isPinValidService = async (
   cardNumber: string,
@@ -8,7 +8,7 @@ export const isPinValidService = async (
 ) => {
   try {
     const card = await getCardByNumberRepository(cardNumber);
-    return bcrypt.compareSync(cardPin, card.pin);
+    return comparePin(cardPin, card.pin);
   } catch (error) {
     console.error(error);
     throw new InternalServerError("PIN validation failed", "CARD_SERVICE");

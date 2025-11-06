@@ -1,8 +1,8 @@
 import {
   depositController,
   withdrawController,
-} from "@/controllers/accounts.controller";
-import { authenticationMiddleware } from "@/middleware/authentication.middleware";
+} from "@/api/controllers/accounts.controller";
+import { authenticationMiddleware } from "@/api/middleware/authentication.middleware";
 import { Router } from "express";
 
 const router = Router();

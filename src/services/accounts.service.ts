@@ -9,24 +9,24 @@ import {
   InternalServerError,
   UnauthorizedError,
 } from "@/helpers/custom-errors.helper";
+import {
+  calculateDeposit,
+  calculateWithdrawal,
+  validateAccountOwnership,
+  validateAmount,
+  validateSufficientFunds,
+} from "@/core/accounts.core";
 
 export const depositService = async (deposit: DepositDto): Promise<Account> => {
   try {
-    if (deposit.amount <= 0) {
-      throw new BadRequestError(
-        "Deposit amount must be greater than zero",
-        "DEPOSIT_SERVICE"
-      );
-    }
+    validateAmount(deposit.amount, "deposit");
+
     const card = await getCardByNumberService(deposit.cardNumber);
     const account = await getAccountByIdRepository(card.accountId);
-    if (deposit.iban !== account.iban) {
-      throw new UnauthorizedError(
-        "Card does not belong to the account",
-        "DEPOSIT_SERVICE"
-      );
-    }
-    const newAmount = account.amount + deposit.amount;
+
+    validateAccountOwnership(account.iban, deposit.iban, "deposit");
+
+    const newAmount = calculateDeposit(account.amount, deposit.amount);
     return await updateAccountAmountRepository(account.iban, newAmount);
   } catch (error) {
     if (
@@ -43,24 +43,15 @@ export const withdrawService = async (
   withdraw: WithdrawDto
 ): Promise<Account> => {
   try {
-    if (withdraw.amount <= 0) {
-      throw new BadRequestError(
-        "Withdraw amount must be greater than zero",
-        "WITHDRAW_SERVICE"
-      );
-    }
+    validateAmount(withdraw.amount, "withdraw");
+
     const card = await getCardByNumberService(withdraw.cardNumber);
     const account = await getAccountByIdRepository(card.accountId);
-    if (withdraw.iban !== account.iban) {
-      throw new UnauthorizedError(
-        "Card does not belong to the account",
-        "WITHDRAW_SERVICE"
-      );
-    }
-    const newAmount = account.amount - withdraw.amount;
-    if (newAmount < 0) {
-      throw new BadRequestError("Insufficient funds", "WITHDRAW_SERVICE");
-    }
+    validateAccountOwnership(account.iban, withdraw.iban, "withdraw");
+
+    const newAmount = calculateWithdrawal(account.amount, withdraw.amount);
+    validateSufficientFunds(account.amount, withdraw.amount);
+
     return await updateAccountAmountRepository(account.iban, newAmount);
   } catch (error) {
     if (
