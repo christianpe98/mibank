@@ -12,7 +12,6 @@ const mapCardRowToModel = (row: any): Card => ({
 export const getCardByNumberRepository = async (
   cardNumber: string
 ): Promise<Card> => {
-  console.log("Fetching card with number:", cardNumber);
   const result = await pool.query("SELECT * FROM cards WHERE number = $1", [
     cardNumber,
   ]);
