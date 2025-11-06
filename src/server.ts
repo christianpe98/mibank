@@ -1,6 +1,8 @@
 import express from "express";
 import { serve, setup } from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
+import accountsRouter from "@/routes/accounts.route";
+import { errorMiddleware } from "./middleware/error.middleware";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -22,6 +24,12 @@ const swaggerOptions = {
 };
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
 app.use("/docs", serve, setup(swaggerDocs));
+
+// Routes
+app.use("/api/accounts", accountsRouter);
+
+// Middleware
+app.use(errorMiddleware);
 
 app.listen(port, () =>
   console.log(`Listening on port ${port} - http://localhost:${port}`)
