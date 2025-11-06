@@ -1,6 +1,6 @@
 import { pool } from "@/db/connection";
 import { NotFoundError } from "@/helpers/custom-errors.helper";
-import type { Card } from "@/models/cards.model";
+import type { Card } from "@/core/models/cards.model";
 
 const mapCardRowToModel = (row: any): Card => ({
   id: row.id,

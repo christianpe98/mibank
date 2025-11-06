@@ -1,4 +1,8 @@
-import type { Account, DepositDto, WithdrawDto } from "@/models/accounts.model";
+import type {
+  Account,
+  DepositDto,
+  WithdrawDto,
+} from "@/core/models/accounts.model";
 import { getCardByNumberService } from "./cards.service";
 import {
   getAccountByIdRepository,
