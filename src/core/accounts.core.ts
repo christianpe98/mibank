@@ -1,3 +1,8 @@
+import {
+  BadRequestError,
+  UnauthorizedError,
+} from "@/helpers/custom-errors.helper";
+
 export const calculateDeposit = (
   currentAmount: number,
   depositAmount: number
@@ -11,11 +16,6 @@ export const calculateWithdrawal = (
 ): number => {
   return currentAmount - withdrawAmount;
 };
-
-import {
-  BadRequestError,
-  UnauthorizedError,
-} from "@/helpers/custom-errors.helper";
 
 export const validateAmount = (amount: number, operation: string) => {
   if (amount <= 0) {
